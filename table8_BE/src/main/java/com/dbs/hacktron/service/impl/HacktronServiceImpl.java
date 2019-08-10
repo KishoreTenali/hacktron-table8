@@ -1,5 +1,7 @@
 package com.dbs.hacktron.service.impl;
 
-public class HacktronServiceImpl {
+import com.dbs.hacktron.service.HacktronService;
+
+public class HacktronServiceImpl implements HacktronService{
 
 }
