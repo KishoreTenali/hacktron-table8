@@ -73,7 +73,7 @@ public class HacktronController {
 		String successMsg = "";
 		Queue queVar = queues.get(queueId);
 		if(queVar != null) {
-			LinkedList<String> data = new LinkedList<String>();
+			LinkedList<String> data = queVar.getData();
 			data.add(message);
 			queVar.setData(data);
 			queues.put(queueId, queVar);
