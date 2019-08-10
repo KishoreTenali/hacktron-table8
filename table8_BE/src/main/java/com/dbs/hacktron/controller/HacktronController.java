@@ -92,4 +92,17 @@ public class HacktronController {
 		queues.get(queueId).getData().poll();
 		return queues.get(queueId).getData().getFirst() + " is removed ";
 	}
+	
+	@GetMapping("/queue/queuecheck/{queueId}")
+	public String checkQueue(@PathVariable("queueId") String queueId) {
+	String message = "";
+	Queue queue = queues.get(queueId);
+	if ( queue.getData().size() == 0 ) {
+	message = "Queue is empty";
+	} else {
+	message = "Queue containes messages";
+	}
+
+	return message;
+	}
 }
