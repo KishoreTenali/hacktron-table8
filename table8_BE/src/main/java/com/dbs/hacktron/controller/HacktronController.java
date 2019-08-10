@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dbs.hacktron.utils.Queue;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v1")
 public class HacktronController {
@@ -26,12 +28,13 @@ public class HacktronController {
 	    
 	
 	
-	@GetMapping("/queue/create/{queueName}")
-	public void addQueue(@PathVariable(value = "queueName") String queueName) {
+	@PostMapping("/queue/create/{queueName}")
+	public String addQueue(@PathVariable(value = "queueName") String queueName) {
 		String queueId = UUID.randomUUID().toString();
 		Queue queue = new Queue(queueId , queueName , new LinkedList<String>());
 		queues.put(queueId, queue);
 		
+		return "Queue " + queueName + " Added successfully";
 	}
 	
 	@GetMapping("/queue")
