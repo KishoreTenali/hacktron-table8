@@ -18,7 +18,7 @@ import com.dbs.hacktron.exception.ResourceNotFoundException;
 import com.dbs.hacktron.utils.Queue;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+
 
 @RestController
 @RequestMapping("/api/v1")
@@ -31,11 +31,17 @@ public class HacktronController {
     
 	@PostMapping("/queue/create/{queueName}")
 	public String addQueue(@PathVariable(value = "queueName") String queueName) {
+		String message = "";
+		if (queues.size() != 5) {
 		String queueId = UUID.randomUUID().toString();
 		Queue queue = new Queue(queueId , queueName , new LinkedList<String>());
 		queues.put(queueId, queue);
+		message = "Queue " + queueName + " Added successfully";
+		} else {
+			message = "Queue reaches maximum limit";
+		}
 		
-		return "Queue " + queueName + " Added successfully";
+		return message;
 	}
 	
 	@GetMapping("/queue")
@@ -91,5 +97,18 @@ public class HacktronController {
 		}
 		queues.get(queueId).getData().poll();
 		return  "Message is removed ";
+	}
+	
+	@GetMapping("/queue/queuecheck/{queueId}")
+	public String checkQueue(@PathVariable("queueId") String queueId) {
+	String message = "";
+	Queue queue = queues.get(queueId);
+	if ( queue.getData().size() == 0 ) {
+	message = "Queue is empty";
+	} else {
+	message = "Queue containes"+queue.getData().size()+" messages";
+	}
+
+	return message;
 	}
 }
