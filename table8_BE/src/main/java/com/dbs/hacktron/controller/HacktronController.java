@@ -62,12 +62,19 @@ public class HacktronController {
 	}
 
 	@PostMapping("/queue/{id}/message/{messageData}")
-	public void createMessage(@PathVariable(value = "id") String queueId ,@PathVariable(value = "messageData") String message ) {
+	public String createMessage(@PathVariable(value = "id") String queueId ,@PathVariable(value = "messageData") String message ) {
+		String successMsg = "";
 		Queue queVar = queues.get(queueId);
-		LinkedList<String> data = new LinkedList<String>();
-		data.add(message);
-		queVar.setData(data);
-		queues.put(queueId, queVar);
+		if(queVar != null) {
+			LinkedList<String> data = new LinkedList<String>();
+			data.add(message);
+			queVar.setData(data);
+			queues.put(queueId, queVar);
+			successMsg = "Message added succesfully";
+		}else {
+			successMsg = "Invalid queueID "+ queueId+".";
+		}
+		return successMsg;
 	}
 
 }
