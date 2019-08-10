@@ -101,7 +101,8 @@ public class HacktronController {
 	
 	@GetMapping("/queue/queuecheck/{queueId}")
 	public String checkQueue(@PathVariable("queueId") String queueId) {
-	String message = "";
+	String message = ""; 
+	
 	Queue queue = queues.get(queueId);
 	if ( queue.getData().size() == 0 ) {
 	message = "Queue is empty";
