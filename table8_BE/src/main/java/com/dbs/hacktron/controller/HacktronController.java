@@ -66,7 +66,6 @@ public class HacktronController {
 		return queue.getData();
 		
 	}
-	
 
 	@PostMapping("/queue/{id}/message/{messageData}")
 	public String createMessage(@PathVariable(value = "id") String queueId ,@PathVariable(value = "messageData") String message ) {
@@ -83,7 +82,6 @@ public class HacktronController {
 		}
 		return successMsg;
 	}
-
 
 	@DeleteMapping("/queue/{id}/message/")
 	public String deleteMessageByQueueId(@PathVariable(value = "id") String queueId,
