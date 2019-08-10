@@ -8,10 +8,10 @@
     <version>2.2.0.BUILD-SNAPSHOT</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.example</groupId>
-  <artifactId>demo</artifactId>
+  <groupId>com.hacktron</groupId>
+  <artifactId>hacktron</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>demo</name>
+  <name>hacktron</name>
   <description>Demo project for Spring Boot</description>
 
   <properties>
