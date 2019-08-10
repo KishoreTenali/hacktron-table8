@@ -83,13 +83,13 @@ public class HacktronController {
 		return successMsg;
 	}
 
-	@DeleteMapping("/queue/{id}/message/")
+	@DeleteMapping("/queue/{id}/message")
 	public String deleteMessageByQueueId(@PathVariable(value = "id") String queueId,
 			@PathVariable(value = "id") String messageId) throws ResourceNotFoundException {
 		if(queues.get(queueId).equals(null)){
 			throw new ResourceNotFoundException("invalid QueueId");
 		}
 		queues.get(queueId).getData().poll();
-		return queues.get(queueId).getData().getFirst() + " is removed ";
+		return  "Message is removed ";
 	}
 }
