@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dbs.hacktron.exception.ResourceNotFoundException;
 import com.dbs.hacktron.utils.Queue;
+
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -38,23 +40,30 @@ public class HacktronController {
 	}
 	
 	@GetMapping("/queue")
-	public @ResponseBody Map<String,Queue> getQueueList() {
+	public @ResponseBody Map<String,Queue> getQueueList() throws ResourceNotFoundException {
 		
+		if(queues.isEmpty())
+		{
+			throw new ResourceNotFoundException("No QUEUES Found");
+		}
 		return queues;
 	}
 	
 	@DeleteMapping("/queue/{queueId}")
-	public String deleteQueue(@PathVariable("queueId") String queueId) {
+	public String deleteQueue(@PathVariable("queueId") String queueId) throws ResourceNotFoundException {
+		if(queues.get(queueId).equals(null)){
+			throw new ResourceNotFoundException("invalid QueueId");
+		}
 		queues.remove(queueId);
-		
 		return "Queue " + queueId + " Removed Successfully";
 	}
 	
 	@GetMapping("/queue/{id}/message")
-	public LinkedList<String> getAllMessages(@PathVariable(value = "id") String queueId) {
-		
+	public LinkedList<String> getAllMessages(@PathVariable(value = "id") String queueId) throws ResourceNotFoundException {
+		if(queues.get(queueId).equals(null)){
+			throw new ResourceNotFoundException("invalid QueueId");
+		}
 		Queue queue = queues.get(queueId);
-		
 		return queue.getData();
 		
 	}
@@ -63,9 +72,11 @@ public class HacktronController {
 
 	@DeleteMapping("/queue/{id}/message/")
 	public String deleteMessageByQueueId(@PathVariable(value = "id") String queueId,
-			@PathVariable(value = "id") String messageId) {
+			@PathVariable(value = "id") String messageId) throws ResourceNotFoundException {
+		if(queues.get(queueId).equals(null)){
+			throw new ResourceNotFoundException("invalid QueueId");
+		}
 		queues.get(queueId).getData().poll();
-		
 		return queues.get(queueId).getData().getFirst() + " is removed ";
 	}
 }
