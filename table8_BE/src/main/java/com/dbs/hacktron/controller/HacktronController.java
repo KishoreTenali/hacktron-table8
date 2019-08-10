@@ -46,4 +46,21 @@ public class HacktronController {
 		
 		return "Queue " + queueId + " Removed Successfully";
 	}
+	
+	@GetMapping("/queue/{id}/message")
+	public LinkedList<String> getAllMessages(@PathVariable(value = "id") String queueId) {
+		Queue que = queues.get(queueId);
+		return que.getData();
+		
+	}
+
+	@PostMapping("/queue/{id}/message/{messageData}")
+	public void createMessage(@PathVariable(value = "id") String queueId ,@PathVariable(value = "messageData") String message ) {
+		Queue queVar = queues.get(queueId);
+		LinkedList<String> data = new LinkedList<String>();
+		data.add(message);
+		queVar.setData(data);
+		queues.put(queueId, queVar);
+	}
+
 }
