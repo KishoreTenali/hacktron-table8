@@ -1,0 +1,67 @@
+table {
+    width: 100%;
+  }
+  
+  table {
+    width: 70%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+td,
+th {
+    width: 25%;
+    color: black;
+}
+
+
+/* .mat-column-position {
+    max-width: 100px;
+}
+
+.mat-column-name {
+    max-width: 100px;
+}
+
+mat-in {
+    color: black;
+}
+
+.mat-header-row {
+    color: white;
+}
+
+.mat-row {
+    color: white;
+    /* background-color: darkgray; 
+
+
+}*/
+
+.mat-header-cell {
+    font-size: 15px;
+}
+
+::ng-deep .mat-form-field-placeholder {
+    color: red;
+}
+
+ ::ng-deep .mat-focused .mat-form-field-placeholder {
+    color: red;
+}
+
+::ng-deep .mat-form-field-underline .mat-form-field-ripple {
+    background-color: red;
+}
+
+ ::ng-deep .mat-form-field-underline {
+    background-color: red;
+}
+
+/* /deep/ .mat-input-placeholder {
+    color: #fff;
+    font-size: 2em;
+} */
