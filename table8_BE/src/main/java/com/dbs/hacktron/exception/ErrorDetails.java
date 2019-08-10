@@ -1,4 +1,4 @@
-package com.dbs.exception;
+package com.dbs.hacktron.exception;
 
 import java.util.Date;
 

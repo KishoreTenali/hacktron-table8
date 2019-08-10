@@ -1,6 +1,6 @@
-package com.dbs.hackathon.service;
+package com.dbs.hacktron.service;
 
-public interface MessageService {
+public interface IMessageService {
 
 	public String getAllMessages();
 	
