@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dbs.hacktron.utils.Queue;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/v1")
 public class HacktronController {
@@ -25,9 +25,7 @@ public class HacktronController {
 	public static Map<String,Queue> queues = new TreeMap<String,Queue>();
 	   
     public static int queueCount = 0;
-	    
-	
-	
+    
 	@PostMapping("/queue/create/{queueName}")
 	public String addQueue(@PathVariable(value = "queueName") String queueName) {
 		String queueId = UUID.randomUUID().toString();
