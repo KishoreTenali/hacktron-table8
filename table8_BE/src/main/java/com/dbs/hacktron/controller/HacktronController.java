@@ -8,7 +8,6 @@ import java.util.UUID;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,5 +44,24 @@ public class HacktronController {
 		queues.remove(queueId);
 		
 		return "Queue " + queueId + " Removed Successfully";
+	}
+	
+	@GetMapping("/queue/{id}/message")
+	public LinkedList<String> getAllMessages(@PathVariable(value = "id") String queueId) {
+		
+		Queue queue = queues.get(queueId);
+		
+		return queue.getData();
+		
+	}
+	
+
+
+	@DeleteMapping("/queue/{id}/message/")
+	public String deleteMessageByQueueId(@PathVariable(value = "id") String queueId,
+			@PathVariable(value = "id") String messageId) {
+		queues.get(queueId).getData().poll();
+		
+		return queues.get(queueId).getData().getFirst() + " is removed ";
 	}
 }
