@@ -28,11 +28,17 @@ public class HacktronController {
     
 	@PostMapping("/queue/create/{queueName}")
 	public String addQueue(@PathVariable(value = "queueName") String queueName) {
-		String queueId = UUID.randomUUID().toString();
-		Queue queue = new Queue(queueId , queueName , new LinkedList<String>());
-		queues.put(queueId, queue);
+		String message = "";
+		if (queues.size() != 100) {
+			String queueId = UUID.randomUUID().toString();
+			Queue queue = new Queue(queueId , queueName , new LinkedList<String>());
+			queues.put(queueId, queue);	
+			message = "Queue " + queueName + " Added successfully";
+		} else {
+			message = "Queue count is reached maximum limit";
+		}
 		
-		return "Queue " + queueName + " Added successfully";
+		return  message;
 	}
 	
 	@GetMapping("/queue")
