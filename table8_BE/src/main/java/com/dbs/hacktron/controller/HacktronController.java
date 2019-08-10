@@ -18,7 +18,7 @@ import com.dbs.hacktron.exception.ResourceNotFoundException;
 import com.dbs.hacktron.utils.Queue;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+
 
 @RestController
 @RequestMapping("/api/v1")
@@ -100,7 +100,7 @@ public class HacktronController {
 	if ( queue.getData().size() == 0 ) {
 	message = "Queue is empty";
 	} else {
-	message = "Queue containes messages";
+	message = "Queue containes"+queue.getData().size()+" messages";
 	}
 
 	return message;
