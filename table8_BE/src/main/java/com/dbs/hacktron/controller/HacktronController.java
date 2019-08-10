@@ -50,7 +50,7 @@ public class HacktronController {
 	
 	@DeleteMapping("/queue/{queueId}")
 	public String deleteQueue(@PathVariable("queueId") String queueId) throws ResourceNotFoundException {
-		if(queues.get(queueId).equals(null)){
+		if(!queues.containsKey(queueId) || queues.get(queueId).equals(null)){
 			throw new ResourceNotFoundException("invalid QueueId");
 		}
 		queues.remove(queueId);
@@ -59,7 +59,7 @@ public class HacktronController {
 	
 	@GetMapping("/queue/{id}/message")
 	public LinkedList<String> getAllMessages(@PathVariable(value = "id") String queueId) throws ResourceNotFoundException {
-		if(queues.get(queueId).equals(null)){
+		if(!queues.containsKey(queueId) || queues.get(queueId).equals(null)){
 			throw new ResourceNotFoundException("invalid QueueId");
 		}
 		Queue queue = queues.get(queueId);
@@ -86,7 +86,7 @@ public class HacktronController {
 	@DeleteMapping("/queue/{id}/message")
 	public String deleteMessageByQueueId(@PathVariable(value = "id") String queueId,
 			@PathVariable(value = "id") String messageId) throws ResourceNotFoundException {
-		if(queues.get(queueId).equals(null)){
+		if(!queues.containsKey(queueId) || queues.get(queueId).equals(null)){
 			throw new ResourceNotFoundException("invalid QueueId");
 		}
 		queues.get(queueId).getData().poll();
